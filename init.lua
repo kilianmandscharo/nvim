@@ -1,0 +1,8 @@
+require("options")
+require("keymaps")
+require("_treesitter")
+require("_cmp")
+require("lsp")
+require("_gitsigns")
+require("_lualine")
+require("plugins")
