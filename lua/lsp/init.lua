@@ -1,4 +1,5 @@
 local ok, packages = require("lsp.packages").all()
+
 if not ok then
   return
 end
