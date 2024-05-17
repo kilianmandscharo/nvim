@@ -6,8 +6,11 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "jose-elias-alvarez/null-ls.nvim",
+      { "folke/neodev.nvim", opts = {} }
     },
     config = function()
+      require("neodev").setup()
+
       local capabilities = nil
       if pcall(require, "cmp_nvim_lsp") then
         capabilities = require("cmp_nvim_lsp").default_capabilities()
