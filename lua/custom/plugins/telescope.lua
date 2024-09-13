@@ -1,13 +1,26 @@
 return {
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      local builtin = require "telescope.builtin"
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        keys = {
+            { "<leader>p", ":Telescope find_files<CR>" },
+            { "<leader>g", ":Telescope live_grep<CR>" },
+            { "<leader>/", ":Telescope current_buffer_fuzzy_find<CR>" },
+        },
+        config = function()
+            local actions = require "telescope.actions"
 
-      vim.keymap.set("n", "<leader>p", builtin.find_files)
-      vim.keymap.set("n", "<leader>g", builtin.live_grep)
-      vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
-    end
-  }
+            require('telescope').setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<Tab>"] = actions.toggle_selection + actions.move_selection_next,
+                            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_previous,
+                            ["<C-s>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        }
+                    }
+                },
+            }
+        end
+    }
 }

@@ -19,7 +19,22 @@ return {
       local lspconfig = require("lspconfig")
 
       local servers = {
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              semanticTokens = true,
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            }
+          }
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -35,7 +50,11 @@ return {
             },
           },
         },
-        tsserver = {},
+        ts_ls = {
+          server_capabilities = {
+            documentFormattingProvider = false,
+          },
+        },
         tailwindcss = {},
         pyright = {
           settings = {
@@ -53,7 +72,6 @@ return {
         html = {},
         templ = {},
       }
-
 
       vim.filetype.add({ extension = { templ = "templ" } })
 
@@ -76,10 +94,6 @@ return {
       })
 
       local on_attach = function(client, bufnr)
-        if client.name == "tsserver" then
-          client.server_capabilities.documentFormattingProvider = false
-        end
-
         local opts = { noremap = true, silent = true }
         local keymap = vim.api.nvim_buf_set_keymap
         keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
