@@ -11,6 +11,10 @@ return {
             local actions = require "telescope.actions"
 
             require('telescope').setup {
+                file_ignore_patterns = {
+                    "node_modules",
+                    "*templ.go*",
+                },
                 defaults = {
                     mappings = {
                         i = {
