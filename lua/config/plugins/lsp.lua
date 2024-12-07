@@ -72,6 +72,7 @@ return {
                 html = {},
                 templ = {},
                 ocamllsp = {},
+                denols = {},
             }
 
             vim.filetype.add({ extension = { templ = "templ" } })
@@ -182,7 +183,11 @@ return {
                             "txt",
                         },
                     }),
-                    null_ls.builtins.formatting.black
+                    null_ls.builtins.formatting.black.with({
+                        filetypes = {
+                            "python"
+                        }
+                    })
                 },
             })
         end,
