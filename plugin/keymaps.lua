@@ -1,11 +1,16 @@
 local set = vim.keymap.set;
 
 -- Formatting
-set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>")
-
--- Lua
-set("n", "<space><space>x", "<cmd>source %<CR>")
-set("n", "<space>x", "<cmd>:.lua<CR>")
+set("n", "<leader>f", function()
+    local filetype = vim.bo.filetype
+    if filetype == "python" then
+        vim.cmd("write")
+        vim.cmd("!black %")
+        vim.cmd("edit")
+    else
+        vim.lsp.buf.format()
+    end
+end)
 
 -- Window navigation
 set("n", "<C-h>", "<C-w>h")
