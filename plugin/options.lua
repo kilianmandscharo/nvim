@@ -22,3 +22,11 @@ vim.opt.laststatus = 3
 vim.opt.winbar = "%=%m %f"
 
 vim.cmd.colorscheme("catppuccin-mocha")
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Hightlight when yanking text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end
+})
