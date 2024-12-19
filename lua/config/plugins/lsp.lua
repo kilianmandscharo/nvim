@@ -8,11 +8,6 @@ return {
             "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
-            local capabilities = nil
-            if pcall(require, "cmp_nvim_lsp") then
-                capabilities = require("cmp_nvim_lsp").default_capabilities()
-            end
-
             local lspconfig = require("lspconfig")
 
             local servers = {
@@ -69,7 +64,6 @@ return {
                 html = {},
                 templ = {},
                 ocamllsp = {},
-                denols = {},
             }
 
             vim.filetype.add({ extension = { templ = "templ" } })
@@ -109,6 +103,7 @@ return {
                 illuminate.on_attach(client)
             end
 
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             for server, server_opts in pairs(servers) do
                 local opts = {
