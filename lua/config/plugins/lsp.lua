@@ -64,6 +64,7 @@ return {
                 html = {},
                 templ = {},
                 ocamllsp = {},
+                eslint = {},
             }
 
             vim.filetype.add({ extension = { templ = "templ" } })
