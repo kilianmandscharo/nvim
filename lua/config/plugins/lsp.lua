@@ -60,10 +60,12 @@ return {
                 cssls = {},
                 clangd = {},
                 rust_analyzer = {},
-                htmx = {},
                 html = {},
                 templ = {},
                 eslint = {},
+                htmx = {
+                    filetypes = { "html", "templ" }
+                },
             }
 
             vim.filetype.add({ extension = { templ = "templ" } })
