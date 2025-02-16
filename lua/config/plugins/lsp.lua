@@ -6,6 +6,7 @@ return {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
+            "saghen/blink.cmp",
         },
         config = function()
             local lspconfig = require("lspconfig")
@@ -105,7 +106,7 @@ return {
                 illuminate.on_attach(client)
             end
 
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
             for server, server_opts in pairs(servers) do
                 local opts = {
