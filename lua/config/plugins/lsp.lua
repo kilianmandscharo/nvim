@@ -63,7 +63,6 @@ return {
                 htmx = {},
                 html = {},
                 templ = {},
-                ocamllsp = {},
                 eslint = {},
             }
 

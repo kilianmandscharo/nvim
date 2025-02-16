@@ -7,7 +7,7 @@ set("n", "<leader>f", function()
         vim.cmd("write")
         vim.cmd("!black %")
         vim.cmd("edit")
-    elseif filetype == "javascript" or filetype == "typescript" or filetype == "json" then
+    elseif filetype == "javascript" or filetype == "typescript" or filetype == "json" or filetype == "typescriptreact" or filetype == "javascriptreact" then
         vim.cmd("write")
         vim.cmd("!prettier % --write --tab-width 4")
         vim.cmd("edit")
