@@ -18,9 +18,18 @@ return {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
             cmdline = {
-                sources = {},
+                completion = {
+                    ghost_text = {
+                        enabled = true
+                    }
+                }
             },
-            signature = { enabled = true }
+            signature = { enabled = true },
+        },
+        completion = {
+            ghost_text = {
+                enabled = true,
+            }
         },
         opts_extend = { "sources.default" }
     }
