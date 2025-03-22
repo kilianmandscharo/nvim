@@ -23,3 +23,6 @@ set("t", "<Esc>", "<C-\\><C-n>")
 
 -- Toggle Quick Fix List
 set("n", "<leader>b", functions.toggleQuickFix)
+
+-- Custom Telescope Picker
+vim.keymap.set("n", "<leader>fg", functions.live_multigrep)
