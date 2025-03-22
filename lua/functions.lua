@@ -1,6 +1,6 @@
 local M = {}
 
-M.runTest = function()
+local getJestCommand = function()
     local line = vim.api.nvim_get_current_line()
     local test_name = line:match("describe%(\"(.-)\"") or line:match("it%(\"(.-)\"")
     if not test_name then
@@ -9,6 +9,26 @@ M.runTest = function()
 
     local file_path = vim.fn.expand("%:p")
     local cmd = string.format("npx jest \"%s\" -t \"%s\"", file_path, test_name)
+
+    return cmd
+end
+
+M.runTest = function()
+    local file_name = vim.fn.expand("%:t")
+    local cmd = nil
+
+    if
+        file_name:match(".test.ts") or
+        file_name:match(".test.js") or
+        file_name:match(".spec.ts") or
+        file_name:match(".spec.js")
+    then
+        cmd = getJestCommand()
+    end
+
+    if not cmd then
+        return
+    end
 
     vim.cmd("vsplit | terminal")
     vim.fn.chansend(vim.b.terminal_job_id, cmd .. "\n")
