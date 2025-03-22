@@ -1,20 +1,11 @@
 local set = vim.keymap.set;
+local functions = require("functions")
 
 -- Formatting
-set("n", "<leader>f", function()
-    local filetype = vim.bo.filetype
-    if filetype == "python" then
-        vim.cmd("write")
-        vim.cmd("!black %")
-        vim.cmd("edit")
-    elseif filetype == "javascript" or filetype == "typescript" or filetype == "json" or filetype == "typescriptreact" or filetype == "javascriptreact" then
-        vim.cmd("write")
-        vim.cmd("!prettier % --write --tab-width 4")
-        vim.cmd("edit")
-    else
-        vim.lsp.buf.format()
-    end
-end)
+set("n", "<leader>f", functions.formatFile)
+
+-- Testing
+set("n", "<leader>rt", functions.runTest)
 
 -- Window navigation
 set("n", "<C-h>", "<C-w>h")
@@ -31,19 +22,4 @@ set("n", "<leader>c", ":bdelete<CR>")
 set("t", "<Esc>", "<C-\\><C-n>")
 
 -- Toggle Quick Fix List
-set("n", "<leader>b", function()
-    local qf_open = false
-
-    for _, win in pairs(vim.fn.getwininfo()) do
-        if win["quickfix"] == 1 then
-            qf_open = true
-            break
-        end
-    end
-
-    if qf_open == true then
-        vim.cmd("cclose")
-    else
-        vim.cmd("copen")
-    end
-end)
+set("n", "<leader>b", functions.toggleQuickFix)
