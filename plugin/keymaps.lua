@@ -26,3 +26,6 @@ set("n", "<leader>b", functions.toggleQuickFix)
 
 -- Custom Telescope Picker
 vim.keymap.set("n", "<leader>fg", functions.live_multigrep)
+
+-- Code Actions
+vim.keymap.set("n", "<leader>ma", ":lua vim.lsp.buf.code_action()<CR>")

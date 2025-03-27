@@ -14,6 +14,19 @@ local getJestCommand = function()
     return cmd
 end
 
+local getGoTestCommand = function()
+    local line = vim.api.nvim_get_current_line()
+
+    local test_name = line:match("func (.+)%(")
+    if not test_name then
+        return nil
+    end
+
+    local cmd = string.format("go test -run %s ./...", test_name)
+
+    return cmd
+end
+
 M.runTest = function()
     local file_name = vim.fn.expand("%:t")
     local cmd = nil
@@ -25,6 +38,10 @@ M.runTest = function()
         file_name:match(".spec.js")
     then
         cmd = getJestCommand()
+    end
+
+    if file_name:match("_test.go") then
+        cmd = getGoTestCommand()
     end
 
     if not cmd then
