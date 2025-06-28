@@ -67,6 +67,7 @@ return {
                 htmx = {
                     filetypes = { "html", "templ" }
                 },
+                zls = {},
             }
 
             vim.filetype.add({ extension = { templ = "templ" } })
@@ -87,6 +88,7 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = servers,
                 automatic_installation = true,
+                automatic_enable = false,
             })
 
             local on_attach = function(client, bufnr)
