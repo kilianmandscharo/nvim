@@ -80,7 +80,7 @@ M.toggleQuickFix = function()
     if qf_open == true then
         vim.cmd("cclose")
     else
-        vim.cmd("copen")
+        vim.cmd("botright copen")
     end
 end
 
