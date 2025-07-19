@@ -19,7 +19,7 @@ vim.g.netrw_winsize = 20
 
 vim.opt.colorcolumn = "80"
 vim.opt.laststatus = 3
-vim.opt.winbar = "%=%m %f"
+-- vim.opt.winbar = "%=%m %f"
 
 vim.cmd.colorscheme("catppuccin-mocha")
 

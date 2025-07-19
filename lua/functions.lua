@@ -128,4 +128,52 @@ M.live_multigrep = function()
     }):find()
 end
 
+M.pick_global_mark = function()
+    local all_marks = vim.fn.getmarklist();
+    local entries = {}
+
+    for _, mark in ipairs(all_marks) do
+        local byte = string.byte(string.sub(mark.mark, #mark.mark))
+        if byte < 65 or byte > 90 then goto continue end
+
+        local filename = mark.file
+        local row = mark.pos[2]
+        local col = mark.pos[3]
+
+        table.insert(entries, {
+            display = string.format("%s  %s:%d:%d", mark.mark, filename, row, col),
+            ordinal = filename .. row .. col,
+            filename = filename,
+            lnum = row,
+            col = col,
+        })
+
+        ::continue::
+    end
+
+    local pickers = require("telescope.pickers")
+    local finders = require("telescope.finders")
+    local sorters = require("telescope.sorters")
+    local themes = require("telescope.themes")
+
+    pickers.new(themes.get_dropdown({
+        prompt_title = "Marks",
+    }), {
+        finder = finders.new_table {
+            results = entries,
+            entry_maker = function(entry)
+                return {
+                    value = entry,
+                    display = entry.display,
+                    ordinal = entry.ordinal,
+                    filename = entry.filename,
+                    lnum = entry.lnum,
+                    col = entry.col,
+                }
+            end
+        },
+        sorter = sorters.get_generic_fuzzy_sorter(),
+    }):find()
+end
+
 return M

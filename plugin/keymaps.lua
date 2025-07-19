@@ -24,5 +24,8 @@ set("t", "<Esc>", "<C-\\><C-n>")
 -- Toggle Quick Fix List
 set("n", "<leader>b", functions.toggleQuickFix)
 
+-- Show all global marks
+set("n", "<leader>m", functions.pick_global_mark)
+
 -- Custom Telescope Picker
-vim.keymap.set("n", "<leader>mg", functions.live_multigrep)
+-- vim.keymap.set("n", "<leader>mg", functions.live_multigrep)
