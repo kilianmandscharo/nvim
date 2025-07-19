@@ -1,8 +1,5 @@
 local set = vim.keymap.set;
-local functions = require("functions")
-
--- Formatting
-set("n", "<leader>f", functions.formatFile)
+local functions = require("util.functions")
 
 -- Testing
 set("n", "<leader>rt", functions.runTest)
