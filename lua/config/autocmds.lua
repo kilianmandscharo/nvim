@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
         map("<leader>f", vim.lsp.buf.format, "Format")
+        map("gd", vim.lsp.buf.definition, "Definition")
         map("K", function()
             vim.lsp.buf.hover({ border = "rounded" })
         end, "Hover Documentation")

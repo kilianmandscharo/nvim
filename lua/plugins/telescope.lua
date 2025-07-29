@@ -11,6 +11,11 @@ return {
             local actions = require "telescope.actions"
 
             require('telescope').setup {
+                pickers = {
+                    find_files = {
+                        theme = "ivy",
+                    },
+                },
                 file_ignore_patterns = {
                     "node_modules",
                     "*templ.go*",

@@ -1,5 +1,6 @@
 vim.lsp.enable({
     "lua_ls",
+    "zls",
 })
 
 vim.diagnostic.config({
