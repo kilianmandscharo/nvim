@@ -52,16 +52,23 @@ M.runTest = function()
     vim.fn.chansend(vim.b.terminal_job_id, cmd .. "\n")
 end
 
+local use_conform_formatter = {
+    python = true,
+    javascript = true,
+    typescript = true,
+    json = true,
+    javascriptreact = true,
+    typescriptreact = true,
+}
+
 M.formatFile = function()
     local filetype = vim.bo.filetype
-    if filetype == "python" then
-        vim.cmd("write")
-        vim.cmd("!black %")
-        vim.cmd("edit")
-    elseif filetype == "javascript" or filetype == "typescript" or filetype == "json" or filetype == "typescriptreact" or filetype == "javascriptreact" then
-        vim.cmd("write")
-        vim.cmd("!prettier % --write --tab-width 4")
-        vim.cmd("edit")
+    if use_conform_formatter[filetype] then
+        require("conform").format({
+            bufnr = vim.api.nvim_get_current_buf(),
+            lsp_fallback = true,
+            async = false,
+        })
     else
         vim.lsp.buf.format()
     end

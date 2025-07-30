@@ -1,8 +1,5 @@
 local set = vim.keymap.set;
-local functions = require("util.functions")
-
--- Testing
-set("n", "<leader>rt", functions.runTest)
+local utils = require("util.functions")
 
 -- Window navigation
 set("n", "<C-h>", "<C-w>h")
@@ -19,10 +16,17 @@ set("n", "<leader>c", ":bdelete<CR>")
 set("t", "<Esc>", "<C-\\><C-n>")
 
 -- Toggle Quick Fix List
-set("n", "<leader>b", functions.toggleQuickFix)
+set("n", "<leader>b", utils.toggleQuickFix)
 
 -- Show all global marks
-set("n", "<leader>m", functions.pick_global_mark)
+set("n", "<leader>m", utils.pick_global_mark)
 
--- Custom Telescope Picker
--- vim.keymap.set("n", "<leader>mg", functions.live_multigrep)
+-- Diagnostic
+set("n", "gl", vim.diagnostic.open_float)
+set("n", "gn", function() vim.diagnostic.jump({ count = vim.v.count1 }) end)
+set("n", "gp", function() vim.diagnostic.jump({ count = -vim.v.count1 }) end)
+
+-- LSP
+set("n", "gd", vim.lsp.buf.definition)
+set("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end)
+set("n", "<leader>f", utils.formatFile)
