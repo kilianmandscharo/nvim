@@ -19,5 +19,6 @@ vim.g.netrw_winsize = 20
 
 vim.opt.colorcolumn = "80"
 vim.opt.laststatus = 3
+vim.opt.cmdheight = 0
 
 vim.cmd.colorscheme("catppuccin-mocha")
